@@ -5,10 +5,17 @@ import { ArrowPathRoundedSquareIcon } from "@heroicons/react/24/outline";
 interface CryptoProps {
   coin_id: string;
 }
-
+interface CoinDetail {
+  id: string;
+  image: string;
+  name: string;
+  current_price: number;
+  price_change_percentage_24h: number;
+  [key: string]: string | number; // Allow additional properties
+}
 export default function Crypto({ coin_id }: CryptoProps) {
   const [loading, setLoading] = useState(true);
-  const [coinDeets, setCoinDeets] = useState<any>([]);
+  const [coinDeets, setCoinDeets] = useState<CoinDetail | null>(null);
 
   async function fetchCoinDeets() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -22,7 +29,7 @@ export default function Crypto({ coin_id }: CryptoProps) {
 
     const coin = await response.json();
 
-    setCoinDeets(coin as any[]);
+    setCoinDeets(coin );
     setLoading(false);
   }
   useEffect(() => {
@@ -54,8 +61,8 @@ export default function Crypto({ coin_id }: CryptoProps) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-row items-center rounded-lg shadow-md bg-gray-800">
-        <CryptoListItem coin={coinDeets} disableHover={true} />
-
+       
+        {coinDeets && <CryptoListItem coin={coinDeets} disableHover={true} />}
         <button
           onClick={setLoadingTrue}
           className="ml-auto mr-7 px-5 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-purple-300 focus:outline-none flex items-center gap-2"
@@ -65,7 +72,7 @@ export default function Crypto({ coin_id }: CryptoProps) {
       </div>
 
       <div className="flex flex-col gap-4 ">
-        {Object.entries(coinDeets)
+      {Object.entries(coinDeets || {})
           .splice(6)
           .map(([key, value]) => (
             <div
@@ -76,7 +83,7 @@ export default function Crypto({ coin_id }: CryptoProps) {
                 {key.replace(/_/g, " ")}
               </div>
               <div className="text-gray-100 ">
-                ${((value as any) || 0).toLocaleString()}
+                ${((value as number) || 0).toLocaleString()}
               </div>
             </div>
           ))}

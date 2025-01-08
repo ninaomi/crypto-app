@@ -20,7 +20,7 @@ export default function CryptoList() {
 
     const coins = await response.json();
 
-    setCoinData(coins as any[]);
+    setCoinData(coins);
     setLoading(false);
   }
 
