@@ -38,7 +38,7 @@ export default function CryptoList() {
 
   if (loading)
     return (
-      <div className="grid grid-cols-5 gap-6 bg-gray-900">
+      <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 bg-gray-900">
         {Array.from({ length: 5 }).map((_, index) => (
           <div
             key={index}
@@ -51,7 +51,7 @@ export default function CryptoList() {
     );
 
   return (
-    <div className="grid grid-cols-5 gap-6 bg-gray-900">
+    <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 bg-gray-900">
       {coinData.map((coin) => {
         return (
           <Link key={coin.id} href={`/coins/${coin.id}`} passHref>
