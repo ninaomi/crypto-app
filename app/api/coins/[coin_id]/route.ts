@@ -5,23 +5,25 @@ export async function GET(req: Request) {
     const url = new URL(req.url);
     const coinId = url.pathname.split("/").pop();
 
-
     if (!coinId) {
-      return NextResponse.json({ error: "Coin ID is required" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Coin ID is required" },
+        { status: 400 }
+      );
     }
 
     const coinJson = {
       id: coinId,
       symbol: null,
       name: null,
-      market_cap: null,
-      fully_diluted_valuation: null,
-      max_supply: null,
+      image: null,
       current_price: null,
       price_change_percentage_24h: null,
+      market_cap: null,
+      fully_diluted_valuation: null,
       total_volume: null,
+      max_supply: null,
     };
-  
 
     const response = await fetch(
       `https://api.coingecko.com/api/v3/coins/${coinId}`
@@ -35,7 +37,7 @@ export async function GET(req: Request) {
 
     coinJson.symbol = coinData.symbol;
     coinJson.name = coinData.name;
-  
+    coinJson.image = coinData.image.small;
     coinJson.market_cap = coinData.market_data?.market_cap?.usd ?? null;
     coinJson.fully_diluted_valuation =
       coinData.market_data?.fully_diluted_valuation?.usd ?? null;
@@ -45,10 +47,7 @@ export async function GET(req: Request) {
       coinData.market_data?.price_change_percentage_24h ?? null;
     coinJson.total_volume = coinData.market_data?.total_volume?.usd ?? null;
 
-
     return NextResponse.json(coinJson);
-
-
   } catch (error) {
     return NextResponse.json(
       { error: (error as Error).message },

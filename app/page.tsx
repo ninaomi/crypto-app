@@ -1,3 +1,5 @@
-export default function CoinsPage() {
-  return <div>Coins Page</div>;
+import { Home } from "../components/Home";
+
+export default async function CoinsPage() {
+  return <Home />;
 }

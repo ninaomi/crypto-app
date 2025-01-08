@@ -1,3 +1,5 @@
+import Crypto from "../../../components/Crypto";
+
 type Params = {
   params: {
     id: string;
@@ -7,20 +9,9 @@ type Params = {
 export default async function CoinPage({ params }: Params) {
   const { id } = await params;
 
-  const response = await fetch(`http://localhost:3000/api/coins/${id}`, {
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch data for coin: ${id}`);
-  }
-
-  const coin = await response.json();
-
   return (
-    <div>
-      <h1>Coin Details: {id}</h1>
-      <pre>{JSON.stringify(coin, null, 2)}</pre>
+    <div className="flex flex-col text-white min-h-screen p-6 bg-gray-900">
+      <Crypto coin_id={id} />
     </div>
   );
 }
