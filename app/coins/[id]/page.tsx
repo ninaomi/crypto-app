@@ -1,13 +1,9 @@
 import Crypto from "../../../components/Crypto";
 
-type Params = {
-  params: {
-    id: string;
-  };
-};
 
-export default async function CoinPage({ params }: Params) {
-  const { id } = await params;
+export default async function CoinPage({ params }: { params: Promise<{ id: string }> }) {
+    const id = (await params).id;
+   
 
   return (
     <div className="flex flex-col text-white min-h-screen p-6 bg-gray-900">

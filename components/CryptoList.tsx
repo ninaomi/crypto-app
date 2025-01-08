@@ -18,7 +18,7 @@ export default function CryptoList() {
   async function fetchCoinData() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    const response = await fetch("http://localhost:3000/api/coins", {
+    const response = await fetch("/api/coins", {
       cache: "no-store",
     });
 

@@ -19,7 +19,7 @@ export default function Crypto({ coin_id }: CryptoProps) {
 
   async function fetchCoinDeets() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    const response = await fetch(`http://localhost:3000/api/coins/${coin_id}`, {
+    const response = await fetch(`/api/coins/${coin_id}`, {
       cache: "no-store",
     });
 
