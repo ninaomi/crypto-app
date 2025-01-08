@@ -3,9 +3,17 @@ import CryptoListItem from "./CryptoListItem";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
+interface Coin {
+  id: string;
+  name: string;
+  image: string;
+  current_price: number;
+  price_change_percentage_24h: number;
+}
+
 export default function CryptoList() {
   const [loading, setLoading] = useState(true);
-  const [coinData, setCoinData] = useState<any[]>([]);
+  const [coinData, setCoinData] = useState<Coin[]>([]);
 
   async function fetchCoinData() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
