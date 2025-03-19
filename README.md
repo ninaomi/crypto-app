@@ -21,11 +21,3 @@ Crypto App is a web application that provides users with up-to-date information 
 - **Deployment:**
   - Hosted on [Vercel](https://vercel.com/) for seamless deployment and scalability.
 
-## Installation
-
-To run this project locally, follow these steps:
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/ninaomi/crypto-app.git
